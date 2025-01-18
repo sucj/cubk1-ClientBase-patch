@@ -1,23 +1,10 @@
-# gradle
-
+d ### Gradle ###
 .gradle/
 build/
-out/
-classes/
 
-# idea
-
+### IntelliJ IDEA ###
 .idea/
+*.iws
 *.iml
 *.ipr
-*.iws
-
-# vscode
-
-.settings/
-.vscode/
-bin/
-.classpath
-.project
-
-# qmxdre1
+out/
