@@ -3,6 +3,9 @@ package org.union4dev.base.value;
 import java.util.ArrayList;
 import java.util.function.BooleanSupplier;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public abstract class AbstractValue<T> {
     private String name;
     private T value;
@@ -39,4 +42,6 @@ public abstract class AbstractValue<T> {
         }
         return true;
     }
+    public abstract void toJson(JsonObject jsonObject);
+    public abstract void fromJson(JsonElement jsonObject);
 }

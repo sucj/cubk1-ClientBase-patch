@@ -21,6 +21,10 @@ public class KeyBinding implements Comparable<KeyBinding>
     public boolean pressed;
     private int pressTime;
 
+    public boolean keepPressed;
+    public boolean noPressed;
+
+
     public static void onTick(int keyCode)
     {
         if (keyCode != 0)
@@ -82,10 +86,14 @@ public class KeyBinding implements Comparable<KeyBinding>
     }
 
     /**
-     * Returns true if the key is pressed (used for continuous querying). Should be used in tickers.
+     * Returns true if the key is pressed (used for continuous querying). Should be
+     * used in tickers.
      */
-    public boolean isKeyDown()
-    {
+    public boolean isKeyDown() {
+        if (this.noPressed)
+            return false;
+        if (this.keepPressed)
+            return true;
         return this.pressed;
     }
 

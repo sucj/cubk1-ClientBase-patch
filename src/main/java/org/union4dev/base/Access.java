@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.Display;
 import org.union4dev.base.annotations.system.Command;
 import org.union4dev.base.command.CommandManager;
+import org.union4dev.base.config.ConfigManager;
 
 import org.union4dev.base.gui.click.ClickGuiScreen;
 import org.union4dev.base.gui.font.FontManager;
@@ -20,7 +21,7 @@ import org.union4dev.base.util.LiteInvoke;
 @LiteInvoke.Instance
 public final class Access {
 
-    public static String CLIENT_NAME = "Client Base";
+    public static String CLIENT_NAME = "Yako";
 
     /**
      * Client Instance, access managers with this
@@ -36,6 +37,11 @@ public final class Access {
      * CommandManager Instance, access commands here
      */
     private final CommandManager commandManager;
+
+    /**
+     * ConfigManager Instance, access config here
+     */
+    private final ConfigManager configManager;
 
     /**
      * ClickGui Instance
@@ -63,6 +69,7 @@ public final class Access {
         invoke = new LiteInvoke();
         moduleManager = new ModuleManager();
         commandManager = new CommandManager();
+        configManager = new ConfigManager();
         fontManager = new FontManager();
         clickGui = new ClickGuiScreen();
 
@@ -78,6 +85,14 @@ public final class Access {
 
         // Finished Initialization
         Display.setTitle(CLIENT_NAME);
+    }
+
+    public void startUp() {
+        configManager.loadConfigs(configManager.valueConfig);
+    }
+
+    public void stopC() {
+        configManager.saveConfigs(configManager.valueConfig);
     }
 
 
@@ -113,6 +128,15 @@ public final class Access {
      */
     public CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    /**
+     * Get command manager instance
+     *
+     * @return {@link CommandManager}
+     */
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 
     /**

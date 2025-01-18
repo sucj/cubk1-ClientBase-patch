@@ -98,6 +98,7 @@ import org.union4dev.base.events.EventManager;
 import org.union4dev.base.events.misc.KeyInputEvent;
 import org.union4dev.base.events.misc.MiddleClickEvent;
 import org.union4dev.base.events.update.TickEvent;
+import org.union4dev.base.events.update.TickEvent.Phase;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -515,6 +516,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
 
         new Access();
+
+        Access.getInstance().startUp();
 
         this.renderGlobal.makeEntityOutlineShader();
     }
@@ -1345,6 +1348,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     public void shutdown()
     {
+        Access.getInstance().stopC();
         this.running = false;
     }
 
@@ -1630,7 +1634,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      * Runs the current tick.
      */
     public void runTick() throws IOException {
-        EventManager.call(new TickEvent());
+        EventManager.call(new TickEvent(Phase.START));
 
         if (this.rightClickDelayTimer > 0) {
             --this.rightClickDelayTimer;
@@ -2134,6 +2138,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         this.mcProfiler.endSection();
         this.systemTime = getSystemTime();
+
+        EventManager.call(new TickEvent(Phase.END));
     }
 
     /**

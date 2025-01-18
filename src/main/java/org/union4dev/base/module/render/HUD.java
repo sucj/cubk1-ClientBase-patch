@@ -38,7 +38,7 @@ public class HUD implements Access.InstanceAccess {
      */
     @EventTarget
     public void onRender2D(Render2DEvent event) {
-        access.getFontManager().F18.drawStringWithShadow("Client Base " + sprint.getClass().getName(), 4, 4, -1);
+        // access.getFontManager().F18.drawStringWithShadow("Client Base " + sprint.getClass().getName(), 4, 4, -1);
         if(array.getValue()){
             int width = event.getScaledResolution().getScaledWidth();
             int y = 4;

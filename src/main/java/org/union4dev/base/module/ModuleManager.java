@@ -296,6 +296,16 @@ public final class ModuleManager implements Initializer {
     }
 
     /**
+     * Get single value for module
+     *
+     * @param module Module Class
+     * @return {@link Iterable}<{@link AbstractValue}<{@link ?}>>
+     */
+    public AbstractValue<?> getValue(Class<?> module, String name) {
+        return modules.get(module).getValue(name);
+    }
+
+    /**
      * Module has values?
      *
      * @param module Module Class

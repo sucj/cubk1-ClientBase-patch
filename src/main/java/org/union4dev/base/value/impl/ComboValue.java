@@ -2,8 +2,8 @@ package org.union4dev.base.value.impl;
 
 import org.union4dev.base.value.AbstractValue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+import com.google.gson.*;
 
 public class ComboValue extends AbstractValue<String> {
 
@@ -50,5 +50,16 @@ public class ComboValue extends AbstractValue<String> {
 
     public String[] getStrings() {
         return strings;
+    }
+
+    @Override
+    public void toJson(JsonObject jsonObject) {
+        jsonObject.addProperty(getName(),getValue());
+    }
+
+    @Override
+    public void fromJson(JsonElement jsonElement) {
+        String value = jsonElement.getAsString();
+        setValue(value);
     }
 }

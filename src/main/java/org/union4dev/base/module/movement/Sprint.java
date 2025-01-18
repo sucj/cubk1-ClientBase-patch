@@ -27,8 +27,8 @@ public class Sprint implements Access.InstanceAccess {
      * @param event Event
      */
     @EventTarget
-    public void onUpdate(TickEvent event, CommandManager commandManager) {
-        setSuffix(moduleManager.getModules().size() + " Modules and " + commandManager.getCommands().size() + " Commands!", this);
+    public void onTick(TickEvent event) {
+        // setSuffix(moduleManager.getModules().size() + " Modules and " + commandManager.getCommands().size() + " Commands!", this);
 
         mc.gameSettings.keyBindSprint.pressed = true;
     }
@@ -39,7 +39,10 @@ public class Sprint implements Access.InstanceAccess {
      */
     @Enable
     public void onEnable() {
-        ChatUtil.info("Sprint Enabled.");
+        if (mc.thePlayer != null && mc.theWorld != null) {
+            mc.gameSettings.keyBindSprint.keepPressed = true;
+            ChatUtil.info("Sprint Enabled.");
+        }
     }
 
     /**
@@ -48,6 +51,9 @@ public class Sprint implements Access.InstanceAccess {
      */
     @Disable
     public void onDisable() {
-        ChatUtil.info("Sprint Disabled.");
+        if (mc.thePlayer != null && mc.theWorld != null) {
+            mc.gameSettings.keyBindSprint.keepPressed = false;
+            ChatUtil.info("Sprint Disabled.");
+        }
     }
 }

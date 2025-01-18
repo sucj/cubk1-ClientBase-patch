@@ -2,6 +2,10 @@ package org.union4dev.base.value.impl;
 
 import org.union4dev.base.value.AbstractValue;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+
 public class NumberValue extends AbstractValue<Double> {
 
     private Double minimum, maximum, increment;
@@ -44,5 +48,16 @@ public class NumberValue extends AbstractValue<Double> {
 
     public Double getIncrement() {
         return increment;
+    }
+
+    @Override
+    public void toJson(JsonObject jsonObject) {
+        jsonObject.addProperty(getName(),getValue());
+    }
+
+    @Override
+    public void fromJson(JsonElement jsonElement) {
+        double value = jsonElement.getAsFloat();
+        setValue(value);
     }
 }
