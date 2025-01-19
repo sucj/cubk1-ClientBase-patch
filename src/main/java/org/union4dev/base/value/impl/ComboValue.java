@@ -13,6 +13,7 @@ public class ComboValue extends AbstractValue<String> {
 
     public ComboValue(String name, String value, String... values) {
         super(name);
+        this.value = value;
         this.strings = values;
     }
 
