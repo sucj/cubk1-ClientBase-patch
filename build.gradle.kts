@@ -29,7 +29,7 @@ dependencies {
     implementation(group = "commons-codec", name = "commons-codec", version = "1.9")
     implementation(group = "net.java.jinput", name = "jinput", version = "2.0.5")
     implementation(group = "net.java.jutils", name = "jutils", version = "1.0.0")
-    implementation(group = "com.google.code.gson", name = "gson", version = "2.8.6")
+    implementation(group = "com.google.code.gson", name = "gson", version = "2.10.1")
     implementation(group = "org.apache.commons", name = "commons-compress", version = "1.8.1")
     implementation(group = "org.apache.httpcomponents", name = "httpclient", version = "4.3.3")
     implementation(group = "commons-logging", name = "commons-logging", version = "1.1.3")

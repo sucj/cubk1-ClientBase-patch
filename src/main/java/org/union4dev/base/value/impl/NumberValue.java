@@ -5,7 +5,6 @@ import org.union4dev.base.value.AbstractValue;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-
 public class NumberValue extends AbstractValue<Double> {
 
     private Double minimum, maximum, increment;
@@ -57,7 +56,7 @@ public class NumberValue extends AbstractValue<Double> {
 
     @Override
     public void fromJson(JsonElement jsonElement) {
-        double value = jsonElement.getAsFloat();
-        setValue(value);
+        double value = (double) jsonElement.getAsDouble();
+        this.setValue(value);
     }
 }

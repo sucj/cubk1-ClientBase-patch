@@ -15,11 +15,8 @@ import org.union4dev.base.util.LiteInvoke;
 @Module(value = "Sprint",category = Category.Movement)
 public class Sprint implements Access.InstanceAccess {
 
-    private final ModuleManager moduleManager;
-
-    public Sprint(ModuleManager moduleManager) {
-        this.moduleManager = moduleManager;
-    }
+    @LiteInvoke.Autowired
+    private ModuleManager moduleManager;
 
     /**
      * Subscribe a {@link TickEvent}

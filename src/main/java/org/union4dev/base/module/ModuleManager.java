@@ -119,7 +119,7 @@ public final class ModuleManager implements Initializer {
     SubModuleHandle registerSub(ModuleHandle bigFather,Class<?> clazz, String name) {
         try {
             Object instance = clazz.newInstance();
-            SubModuleHandle module = new SubModuleHandle(bigFather,name, instance);
+            SubModuleHandle module = new SubModuleHandle(bigFather, name, instance);
 
             for (final Field field : clazz.getDeclaredFields()) {
                 try {
@@ -301,8 +301,8 @@ public final class ModuleManager implements Initializer {
      * @param module Module Class
      * @return {@link Iterable}<{@link AbstractValue}<{@link ?}>>
      */
-    public AbstractValue<?> getValue(Class<?> module, String name) {
-        return modules.get(module).getValue(name);
+    public AbstractValue<?> getValueByName(Class<?> module, String name) {
+        return (AbstractValue<?>) modules.get(module).getValueByName(name);
     }
 
     /**

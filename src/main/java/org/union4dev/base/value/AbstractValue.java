@@ -42,6 +42,7 @@ public abstract class AbstractValue<T> {
         }
         return true;
     }
+    
     public abstract void toJson(JsonObject jsonObject);
     public abstract void fromJson(JsonElement jsonObject);
 }

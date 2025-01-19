@@ -7,6 +7,8 @@ import org.union4dev.base.util.JsonUtil;
 import org.union4dev.base.value.AbstractValue;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+
 public class ValueConfig extends Config {
     public ValueConfig() {
         super("values.json");
@@ -22,22 +24,21 @@ public class ValueConfig extends Config {
                     JsonObject moduleObject = entry.getValue().getAsJsonObject();
                     if (m != null) {
                         if (moduleObject.has("KeyBind"))
-                        Access.getInstance().getModuleManager().setKey(m, moduleObject.get("KeyBind").getAsInt());
+                            Access.getInstance().getModuleManager().setKey(m, moduleObject.get("KeyBind").getAsInt());
 
                         if (moduleObject.has("State"))
-                        Access.getInstance().getModuleManager().setEnable(m, moduleObject.get("State").getAsBoolean());
+                            Access.getInstance().getModuleManager().setEnable(m, moduleObject.get("State").getAsBoolean());
 
                         if (moduleObject.has("Hidden"))
-                        Access.getInstance().getModuleManager().setVisible(m, moduleObject.get("Hidden").getAsBoolean());
+                            Access.getInstance().getModuleManager().setVisible(m, moduleObject.get("Hidden").getAsBoolean());
 
                         if (moduleObject.has("Values")) {
                             try {
                                 JsonObject valueObject = moduleObject.get("Values").getAsJsonObject();
                                 valueObject.entrySet().forEach(elementEntry -> {
-                                    AbstractValue<?> value = Access.getInstance().getModuleManager().getValue(m, elementEntry.getKey());
-                                    if (value != null) {
+                                    AbstractValue<?> value = Access.getInstance().getModuleManager().getValueByName(m, elementEntry.getKey());
+                                    if (Access.getInstance().getModuleManager().hasValue(m))
                                         value.fromJson(elementEntry.getValue());
-                                    }
                                 });
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -63,11 +64,11 @@ public class ValueConfig extends Config {
             if (Access.getInstance().getModuleManager().hasValue(m)) {
                 JsonObject valueObject = new JsonObject();
                 Access.getInstance().getModuleManager().getValues(m).forEach(value -> value.toJson(valueObject));
-                moduleObject.add("Values",valueObject);
+                moduleObject.add("Values", valueObject);
             }
             object.add(Access.getInstance().getModuleManager().format(m), moduleObject);
         });
 
-        JsonUtil.toFile(file,object);
+        JsonUtil.toFile(file, object);
     }
 }

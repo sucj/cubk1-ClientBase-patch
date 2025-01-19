@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public final class ModuleHandle {
 
@@ -25,7 +26,6 @@ public final class ModuleHandle {
     private final Object object;
 
     private ArrayList<AbstractValue<?>> values;
-    private final HashMap<String, AbstractValue<?>> valueHashMap = new HashMap<>();
 
     private boolean state;
 
@@ -75,26 +75,17 @@ public final class ModuleHandle {
     }
 
     public ArrayList<AbstractValue<?>> getValues() {
-        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
-            try {
-                if (!field.isAccessible()) field.setAccessible(true);
-
-                Object obj = field.get(this);
-                if (obj instanceof AbstractValue) {
-                    AbstractValue<?> value = (AbstractValue<?>) obj;
-                    values.add(value);
-                    valueHashMap.put(value.getName().toLowerCase(), value);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         return values;
     }
 
-    public AbstractValue<?> getValue(String name) {
-        return valueHashMap.getOrDefault(name.toLowerCase(), null);
-    }
+    public AbstractValue<?> getValueByName(String name) {
+        for (AbstractValue<?> value : values) {
+            if (value.getName().equalsIgnoreCase(name)) {
+                return value;
+            }
+        }
+        throw new NoSuchElementException("No value found with the name: " + name); // 抛出异常
+    } // Dude
 
     public void setEnable(boolean state) {
         if (state == this.state) return;

@@ -69,9 +69,9 @@ public final class Access {
         invoke = new LiteInvoke();
         moduleManager = new ModuleManager();
         commandManager = new CommandManager();
-        configManager = new ConfigManager();
         fontManager = new FontManager();
         clickGui = new ClickGuiScreen();
+        configManager = new ConfigManager();
 
         try {
             invoke.registerFields(this);

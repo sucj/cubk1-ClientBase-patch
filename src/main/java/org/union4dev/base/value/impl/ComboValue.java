@@ -14,7 +14,6 @@ public class ComboValue extends AbstractValue<String> {
     public ComboValue(String name, String value, String... values) {
         super(name);
         this.strings = values;
-        this.setValue(value);
     }
 
     public ArrayList<String> getAsArray() {
@@ -54,12 +53,12 @@ public class ComboValue extends AbstractValue<String> {
 
     @Override
     public void toJson(JsonObject jsonObject) {
-        jsonObject.addProperty(getName(),getValue());
+        jsonObject.addProperty(getName(), getValue());
     }
 
     @Override
     public void fromJson(JsonElement jsonElement) {
         String value = jsonElement.getAsString();
-        setValue(value);
+        this.setValue(value);
     }
 }

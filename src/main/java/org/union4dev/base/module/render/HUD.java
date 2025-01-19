@@ -4,13 +4,16 @@ import org.union4dev.base.Access;
 import org.union4dev.base.annotations.event.EventTarget;
 import org.union4dev.base.annotations.system.Module;
 import org.union4dev.base.annotations.system.Startup;
+import org.union4dev.base.annotations.system.Enable;
 import org.union4dev.base.events.render.Render2DEvent;
 import org.union4dev.base.module.Category;
 import org.union4dev.base.module.ModuleManager;
 import org.union4dev.base.module.movement.Sprint;
+import org.union4dev.base.util.ChatUtil;
 import org.union4dev.base.util.LiteInvoke;
 import org.union4dev.base.value.impl.BooleanValue;
 import org.union4dev.base.value.impl.NumberValue;
+import org.union4dev.base.value.impl.ComboValue;
 
 import java.util.ArrayList;
 @Module(value = "HUD",category = Category.Render)
@@ -24,12 +27,17 @@ public class HUD implements Access.InstanceAccess {
 
     public NumberValue spacing = new NumberValue("Spacing",3,1,5,1);
 
-
-    @LiteInvoke.Autowired
-    private Sprint sprint;
+    // An Example Combo value
+    public ComboValue forTest = new ComboValue("QwQ", "xd", "xd", "idk", "test");
 
     @LiteInvoke.Autowired
     private ModuleManager moduleManager;
+
+    @Enable
+    public void onEnable() {
+        if (forTest.isMode("test"))
+            ChatUtil.info("afji ersogjneiort");
+    }
 
     /**
      * Subscribe a {@link Render2DEvent}
