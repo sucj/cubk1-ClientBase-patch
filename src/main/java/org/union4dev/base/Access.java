@@ -21,7 +21,7 @@ import org.union4dev.base.util.LiteInvoke;
 @LiteInvoke.Instance
 public final class Access {
 
-    public static String CLIENT_NAME = "Yako";
+    public static String CLIENT_NAME = "ClientBaseNameWhatYouWanna";
 
     /**
      * Client Instance, access managers with this
